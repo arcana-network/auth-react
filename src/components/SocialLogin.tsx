@@ -20,12 +20,12 @@ const getIcon = (provider: Logins, theme: Theme) => {
   return IconMap[provider];
 };
 
-const Container = styled.div`
+const Wrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-const Wrapper = styled.div`
+const SocialWrapper = styled.div`
   display: flex;
   background: ${(props) => props.theme.fg};
   width: 42px;
@@ -57,14 +57,14 @@ export const SocialLogin = ({
 }) => {
   const theme = useTheme();
   return (
-    <Container>
+    <Wrapper>
       {providers.map((p) => {
         return (
-          <Wrapper key={p} onClick={() => socialLogin(p)}>
+          <SocialWrapper key={p} onClick={() => socialLogin(p)}>
             <Img src={getIcon(p, (theme as ThemeSpec).mode)} alt="" />
-          </Wrapper>
+          </SocialWrapper>
         );
       })}
-    </Container>
+    </Wrapper>
   );
 };

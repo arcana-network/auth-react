@@ -35,11 +35,11 @@ root.render(
 ```jsx
 import { Auth, useAuth } from "@arcana/auth-react";
 
-const onLogin = () => {
-  // Route to authenticated page
-}
 function App() {
   const auth = useAuth();
+  const onLogin = () => {
+    // Route to authenticated page
+  }
   return (
     <div>
       {auth.loading ? (

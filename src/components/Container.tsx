@@ -22,7 +22,7 @@ const Themes: Record<Theme, ThemeSpec> = {
   },
 };
 
-const Outer = styled.div`
+const Wrapper = styled.div`
   padding: 30px 30px;
   min-width: 325px;
   max-width: 325px;
@@ -58,10 +58,10 @@ const Container = ({
   let t = theme ? theme : "dark";
   return (
     <ThemeProvider theme={Themes[t]}>
-      <Outer>
+      <Wrapper>
         <Inner>{children}</Inner>
         <Footer />
-      </Outer>
+      </Wrapper>
     </ThemeProvider>
   );
 };

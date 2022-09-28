@@ -3,7 +3,7 @@ import styled, { useTheme } from "styled-components";
 import { Theme, ThemeSpec } from "../typings";
 import { useAuth } from "../useArcanaAuth";
 
-const HeaderContainer = styled.div`
+const HeaderWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
 `;
 
@@ -68,12 +68,12 @@ const Header = () => {
           }}
         />
       </HeaderLogoWrapper>
-      <HeaderContainer>
+      <HeaderWrapper>
         <HeaderHeading>Welcome</HeaderHeading>
         <HeaderText>
           We’ll email you a login link for a password-free sign in.
         </HeaderText>
-      </HeaderContainer>
+      </HeaderWrapper>
     </>
   );
 };

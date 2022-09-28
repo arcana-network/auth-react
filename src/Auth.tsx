@@ -18,13 +18,12 @@ const loginStateInitValue = {
 };
 
 type AuthProps = {
-  redirectTo: string;
   externalWallet: boolean;
   theme: Theme;
-  onLogin?: () => any;
+  onLogin?: () => void;
 };
 
-const Auth = ({ redirectTo, externalWallet, theme, onLogin }: AuthProps) => {
+const Auth = ({ externalWallet, theme, onLogin }: AuthProps) => {
   const currentTheme = theme ? theme : "dark";
   const auth = useAuth();
   const [loginState, setLoginState] = React.useState(loginStateInitValue);

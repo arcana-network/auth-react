@@ -16,7 +16,8 @@
     "clean": "rimraf dist/ && rimraf types/"
   },
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "author": "",
   "license": "ISC",

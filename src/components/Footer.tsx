@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
 import { Theme, ThemeSpec } from "../typings";
-const Container = styled.div`
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,12 +30,12 @@ const getLogo = (theme: Theme) => {
 const Footer = () => {
   const theme = useTheme();
   return (
-    <Container>
+    <Wrapper>
       <FooterText>Powered by</FooterText>
       <FooterImg href="https://arcana.network/" target="_blank">
         <img src={getLogo((theme as ThemeSpec).mode)} />
       </FooterImg>
-    </Container>
+    </Wrapper>
   );
 };
 

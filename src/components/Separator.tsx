@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Sep = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -22,6 +22,6 @@ const Sep = styled.div`
   }
 `;
 
-const Seperator = ({ text }: { text: string }) => <Sep>{text}</Sep>;
+const Seperator = ({ text }: { text: string }) => <Wrapper>{text}</Wrapper>;
 
 export default Seperator;

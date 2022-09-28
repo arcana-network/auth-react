@@ -2,3 +2,5 @@ node_modules/
 dist/
 types/
 test/
+
+.DS_Store

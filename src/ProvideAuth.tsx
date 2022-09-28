@@ -53,7 +53,7 @@ const useProvideAuth = (auth: AuthProvider): AuthContextType => {
       auth.provider.on("disconnect", onDisconnectHook);
       auth.getLogins().then((logins: Logins[]) => {
         setLoading(false);
-        // @ts-ignore No overlap error
+        // @ts-ignore: No overlap error
         setAvailableLogins(logins.filter((l) => l != "passwordless"));
       });
       providerRef.current = auth.provider;
