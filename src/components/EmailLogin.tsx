@@ -1,7 +1,8 @@
 import React from "react";
 import Button from "./Button";
+import Input from "./styled/Input";
 import styled from "styled-components";
-import { ThemeSpec } from "../typings";
+import { useTheme } from "../Theme";
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -19,29 +20,29 @@ const Label = styled.label`
   font-weight: 400;
 `;
 
-const Input = styled.input`
-  height: 45px;
-  padding: 0 16px;
-  font-size: 14px;
-  font-weight: 400;
-  color: ${(props) => props.theme.fg};
-  background: ${(props) => props.theme.bg};
-  border: none;
-  border-radius: 10px;
-  outline: none;
-  box-shadow: ${(props: { theme: ThemeSpec }) => props.theme.inputShadow};
-`;
+interface EmailLoginProps {
+  linkLogin: (e: string) => any;
+  email: string;
+  setEmail: (e: string) => void;
+}
 
-const EmailLogin = ({ linkLogin }: { linkLogin: (e: string) => any }) => {
-  const [email, setEmail] = React.useState("");
+const EmailLogin = ({ email, setEmail, linkLogin }: EmailLoginProps) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
+  const theme = useTheme();
   return (
     <Form>
       <Label htmlFor="email">Email</Label>
-      <Input type="email" value={email} onChange={onChange} />
-      <Button onClick={() => linkLogin(email)} text="Get Link" />
+      <Input
+        backgroundColor={theme.bg}
+        textColor={theme.fg}
+        inputShadow={theme.inputShadow}
+        type="email"
+        value={email}
+        onChange={onChange}
+      />
+      <Button onClick={() => linkLogin(email)}>Get Link</Button>
     </Form>
   );
 };

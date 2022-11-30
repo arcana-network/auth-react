@@ -9,57 +9,68 @@ import Actions from "./components/Actions";
 import Button from "./components/Button";
 import Loader from "./components/Loader";
 import Separator from "./components/Separator";
-import { Theme } from "./typings";
+import { ThemeType } from "./typings";
 
-const loginStateInitValue = {
+const initLoaderState = {
   text: "",
   loading: false,
   type: "",
 };
 
+const reducer = (
+  state: typeof initLoaderState,
+  action: "SOCIAL" | "LINK" | "RESET"
+) => {
+  if (action == "SOCIAL" || action == "LINK") {
+    return {
+      text: WAIT_TEXT[action],
+      type: action,
+      loading: true,
+    };
+  } else if (action == "RESET") {
+    return initLoaderState;
+  } else {
+    return state;
+  }
+};
 type AuthProps = {
   externalWallet: boolean;
-  theme: Theme;
+  theme: ThemeType;
   onLogin?: () => void;
 };
 
-const Auth = ({ externalWallet, theme, onLogin }: AuthProps) => {
-  const currentTheme = theme ? theme : "dark";
+const Auth = (props?: AuthProps) => {
+  const currentTheme = props?.theme ? props.theme : "dark";
   const auth = useAuth();
-  const [loginState, setLoginState] = React.useState(loginStateInitValue);
+  const [loaderState, dispatch] = React.useReducer(reducer, initLoaderState);
+  const [email, setEmail] = React.useState("");
 
   const socialLogin = async (kind: string) => {
-    setLoginState({
-      text: WAIT_TEXT.SOCIAL,
-      type: "SOCIAL",
-      loading: true,
-    });
+    dispatch("SOCIAL");
 
     if (auth) {
       await auth.loginWithSocial(kind).finally(() => {
-        setLoginState(loginStateInitValue);
-        if (onLogin) {
-          onLogin();
+        dispatch("RESET");
+        if (props?.onLogin) {
+          props.onLogin();
         }
       });
     }
   };
 
-  const linkLogin = async (kind: string) => {
-    setLoginState({
-      text: WAIT_TEXT.LINK,
-      type: "LINK",
-      loading: true,
-    });
+  const linkLogin = async () => {
+    if (!email) {
+      return;
+    }
 
-    await auth?.loginWithLink(kind).finally(() => {
-      setLoginState(loginStateInitValue);
-      if (onLogin) {
-        onLogin();
+    dispatch("LINK");
+
+    await auth?.loginWithLink(email).finally(() => {
+      dispatch("RESET");
+      if (props?.onLogin) {
+        props.onLogin();
       }
     });
-
-    setLoginState(loginStateInitValue);
   };
   if (auth?.loading) {
     return (
@@ -73,19 +84,22 @@ const Auth = ({ externalWallet, theme, onLogin }: AuthProps) => {
     return (
       <Container theme={currentTheme}>
         <p>Logged in as: {auth.user?.email}</p>
-        <Button onClick={() => auth.logout()} text="Logout" />
+        <Button onClick={() => auth.logout()}>Logout</Button>
       </Container>
     );
   }
 
-  if (loginState.loading) {
+  if (loaderState.loading) {
     return (
       <Container theme={currentTheme}>
-        <Loader text={loginState.text}>
-          {loginState.type == "LINK" ? (
+        <Loader text={loaderState.text}>
+          {loaderState.type == "LINK" ? (
             <>
-              <Actions url="" text="Send the email again" />
-              <Actions url="" text="Change email id" />
+              <Actions method={() => linkLogin()} text="Send the email again" />
+              <Actions
+                method={() => dispatch("RESET")}
+                text="Change email id"
+              />
             </>
           ) : (
             ""
@@ -98,17 +112,22 @@ const Auth = ({ externalWallet, theme, onLogin }: AuthProps) => {
   return (
     <Container theme={currentTheme}>
       <Header />
-      <EmailLogin linkLogin={linkLogin} />
-      <Separator text="or continue with" />
-      <SocialLogin
-        providers={auth?.availableLogins || []}
-        socialLogin={socialLogin}
-      />
-
-      {externalWallet ? (
+      <EmailLogin email={email} setEmail={setEmail} linkLogin={linkLogin} />
+      {auth?.availableLogins.length > 0 ? (
+        <>
+          <Separator text="or continue with" />
+          <SocialLogin
+            providers={auth?.availableLogins || []}
+            socialLogin={socialLogin}
+          />
+        </>
+      ) : (
+        ""
+      )}
+      {props?.externalWallet ? (
         <>
           <Separator text="or" />
-          <Button text="CONNECT WALLET" />
+          <Button>CONNECT WALLET</Button>
         </>
       ) : (
         ""

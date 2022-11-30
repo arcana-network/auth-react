@@ -1,7 +1,8 @@
 import React from "react";
-import styled, { useTheme } from "styled-components";
-import { Theme, ThemeSpec } from "../typings";
+import styled from "styled-components";
+import { ThemeType, ThemeSpec } from "../typings";
 import type { Logins } from "@arcana/auth";
+import { useTheme } from "../Theme";
 
 const IconMap = {
   google: "https://auth-icons.s3.ap-south-1.amazonaws.com/google-icon.png",
@@ -13,7 +14,7 @@ const IconMap = {
   discord: "https://auth-icons.s3.ap-south-1.amazonaws.com/discord-icon.png",
 };
 
-const getIcon = (provider: Logins, theme: Theme) => {
+const getIcon = (provider: Logins, theme: ThemeType) => {
   if (provider === "github" && theme == "light") {
     return IconMap["github_light"];
   }
@@ -25,9 +26,9 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const SocialWrapper = styled.div`
+const SocialWrapper = styled.div<{ backgroundColor: string }>`
   display: flex;
-  background: ${(props) => props.theme.fg};
+  background: ${(props) => props.backgroundColor};
   width: 42px;
   height: 42px;
   border-radius: 25px;
@@ -60,7 +61,11 @@ export const SocialLogin = ({
     <Wrapper>
       {providers.map((p) => {
         return (
-          <SocialWrapper key={p} onClick={() => socialLogin(p)}>
+          <SocialWrapper
+            backgroundColor={theme.fg}
+            key={p}
+            onClick={() => socialLogin(p)}
+          >
             <Img src={getIcon(p, (theme as ThemeSpec).mode)} alt="" />
           </SocialWrapper>
         );

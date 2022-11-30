@@ -1,6 +1,8 @@
 import React from "react";
-import styled, { useTheme } from "styled-components";
-import { Theme, ThemeSpec } from "../typings";
+import styled from "styled-components";
+import { useTheme } from "../Theme";
+import { ThemeType } from "../typings";
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -19,7 +21,7 @@ const FooterImg = styled.a`
   margin-left: 5px;
 `;
 
-const getLogo = (theme: Theme) => {
+const getLogo = (theme: ThemeType) => {
   const url = "https://auth-icons.s3.ap-south-1.amazonaws.com/";
   if (theme == "light") {
     return url + "arcana-logo-dark.png";
@@ -32,8 +34,8 @@ const Footer = () => {
   return (
     <Wrapper>
       <FooterText>Powered by</FooterText>
-      <FooterImg href="https://arcana.network/" target="_blank">
-        <img src={getLogo((theme as ThemeSpec).mode)} />
+      <FooterImg href="https://arcana.network" target="_blank">
+        <img src={getLogo(theme.mode)} />
       </FooterImg>
     </Wrapper>
   );

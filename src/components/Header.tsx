@@ -1,7 +1,8 @@
 import React from "react";
-import styled, { useTheme } from "styled-components";
-import { Theme, ThemeSpec } from "../typings";
+import styled from "styled-components";
+import { ThemeType, ThemeSpec } from "../typings";
 import { useAuth } from "../useArcanaAuth";
+import { useTheme } from "../Theme";
 
 const HeaderWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
@@ -34,7 +35,7 @@ const HeaderLogo = styled.img`
   display: inline-block;
 `;
 
-function getImageUrls(appId: string, theme: Theme, gatewayUrl: string) {
+function getImageUrls(appId: string, theme: ThemeType, gatewayUrl: string) {
   const u = new URL(`/api/v2/app/${appId}/logo?type=${theme}`, gatewayUrl);
   return {
     horizontal: `${u.toString()}&orientation=horizontal`,
@@ -57,7 +58,7 @@ const Header = () => {
           src={
             getImageUrls(
               appId,
-              (theme as ThemeSpec).mode,
+              theme.mode,
               "https://gateway-dev.arcana.network"
             ).vertical
           }

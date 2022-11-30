@@ -1,33 +1,21 @@
 import React from "react";
-import styled from "styled-components";
-
-const Btn = styled.button`
-  width: 100%;
-  height: 2.75rem;
-  font-size: 14px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: ${(props) => props.theme.bg};
-  background: ${(props) => props.theme.fg};
-  border: none;
-  border-radius: 10px;
-
-  &:hover {
-    cursor: pointer;
-    transition: all 0.5s;
-    transform: scale(1.05, 1.15);
-  }
-`;
+import Btn from "./styled/Btn";
+import { useTheme } from "../Theme";
 
 type ButtonProps = {
-  onClick?: (e: any) => any;
-  text: string;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => any;
+  children: React.ReactNode;
 };
 
 const Button = (props: ButtonProps) => {
+  const theme = useTheme();
   return (
-    <Btn onClick={(e) => (props.onClick ? props.onClick(e) : null)}>
-      {props.text}
+    <Btn
+      textColor={theme.bg}
+      backgroundColor={theme.fg}
+      onClick={(e) => (props.onClick ? props.onClick(e) : null)}
+    >
+      {props.children}
     </Btn>
   );
 };
