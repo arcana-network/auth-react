@@ -19,9 +19,6 @@ export default {
     resolve(),
     commonjs(),
     typescript({
-      compilerOptions: {
-        declaration: false,
-      },
       tsconfig: "./tsconfig.json",
     }),
   ],

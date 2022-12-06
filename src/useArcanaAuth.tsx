@@ -1,7 +1,8 @@
 import React from "react";
 import { AuthContext } from "./Context";
+import { AuthContextType } from "./typings";
 
-const useAuth = () => {
+const useAuth = (): AuthContextType => {
   const context = React.useContext(AuthContext);
   if (context == null) {
     throw new Error(
@@ -11,12 +12,10 @@ const useAuth = () => {
   return context;
 };
 
-const useLogin = () => {
+const useLogin = (): Omit<AuthContextType, "provider" | "appId"> => {
   const context = React.useContext(AuthContext);
   if (context == null) {
-    throw new Error(
-      "`useAuth` Hook and `Auth` component must be used inside `ProvideAuth`"
-    );
+    throw new Error("`useLogin` Hook must be used inside `ProvideAuth`");
   }
 
   const {
@@ -26,6 +25,10 @@ const useLogin = () => {
     loginWithLink,
     loginWithSocial,
     availableLogins,
+    connect,
+    logout,
+    theme,
+    logo,
   } = context;
 
   return {
@@ -35,18 +38,24 @@ const useLogin = () => {
     loginWithLink,
     loginWithSocial,
     availableLogins,
+    logout,
+    connect,
+    theme,
+    logo,
   };
 };
 
-const useProvider = () => {
+const useProvider = (): Pick<
+  AuthContextType,
+  "isLoggedIn" | "loading" | "provider"
+> => {
   const context = React.useContext(AuthContext);
   if (context == null) {
-    throw new Error(
-      "`useAuth` Hook and `Auth` component must be used inside `ProvideAuth`"
-    );
+    throw new Error("`useProvider` Hook must be used inside `ProvideAuth`");
   }
 
   return {
+    isLoggedIn: context.isLoggedIn,
     loading: context.loading,
     provider: context.provider,
   };

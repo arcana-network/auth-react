@@ -20,6 +20,8 @@ const useProvideAuth = (auth: AuthProvider): AuthContextType => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [availableLogins, setAvailableLogins] = React.useState<Logins[]>([]);
   const [user, setUser] = React.useState<UserInfo | null>(null);
+  const [theme, setTheme] = React.useState<"light" | "dark">("dark");
+  const [logo, setLogo] = React.useState<string>("");
   const providerRef = React.useRef<any>(auth.provider);
 
   const loginWithSocial = async (p: string) => {
@@ -56,6 +58,8 @@ const useProvideAuth = (auth: AuthProvider): AuthContextType => {
     auth.provider.on("connect", onConnectHook);
     auth.provider.on("disconnect", onDisconnectHook);
     auth.init().then(() => {
+      setLogo(auth.logo.vertical);
+      setTheme(auth.theme);
       setLoading(false);
       auth.isLoggedIn().then((loggedIn) => {
         if (!loggedIn) {
@@ -82,7 +86,8 @@ const useProvideAuth = (auth: AuthProvider): AuthContextType => {
     isLoggedIn,
     user,
     connect,
-    appId: auth.appId,
+    logo,
+    theme,
   };
 };
 

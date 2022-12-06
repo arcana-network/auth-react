@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const Link = styled.p`
+const Link = styled.p<{ textColor: string }>`
   text-transform: uppercase;
   text-decoration: underline;
-  color: #13a3fd;
+  color: ${(props) => props.textColor};
   font-weight: 700;
   font-size: 15px;
   line-height: 19px;
@@ -18,7 +18,11 @@ const Actions = ({
   text: string;
   method: () => any;
 }): JSX.Element => {
-  return <Link onClick={() => method()}>{text}</Link>;
+  return (
+    <Link textColor={"#13a3fd"} onClick={() => method()}>
+      {text}
+    </Link>
+  );
 };
 
 export default Actions;

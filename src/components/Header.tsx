@@ -50,18 +50,12 @@ const fallbackLogo: { [k: string]: string } = {
 };
 const Header = () => {
   const theme = useTheme();
-  const { appId } = useAuth();
+  const { logo } = useAuth();
   return (
     <>
       <HeaderLogoWrapper>
         <HeaderLogo
-          src={
-            getImageUrls(
-              appId,
-              theme.mode,
-              "https://gateway-dev.arcana.network"
-            ).vertical
-          }
+          src={logo}
           alt="App Logo"
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;

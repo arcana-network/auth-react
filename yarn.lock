@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@arcana/auth@0.2.3-beta.1":
-  version "0.2.3-beta.1"
-  resolved "https://registry.yarnpkg.com/@arcana/auth/-/auth-0.2.3-beta.1.tgz#0f158e2daa2309e3c4513eb90729fae0dcc39ede"
-  integrity sha512-noAKxqGapO6usZ3bpLdnCaqJgcW8qUKrRBucYRVawXHhC7bD5C4tysbNw//YJutmErgBa9qOa08U2wQ18dbCSA==
+"@arcana/auth@0.2.3-beta.3":
+  version "0.2.3-beta.3"
+  resolved "https://registry.yarnpkg.com/@arcana/auth/-/auth-0.2.3-beta.3.tgz#2ab83f3da09f9d487e2556dfdffa1b7e79b6c213"
+  integrity sha512-8FtvkupuxwJ5p6u0iBLBDRnP3RyNnCeM0FHJxPEDXpvK6v4Kuli9PDjrGwb5e4FkzROwm9cDu9FHmYrkthACjQ==
   dependencies:
     "@metamask/safe-event-emitter" "^2.0.0"
     eth-rpc-errors "^4.0.3"

@@ -1,5 +1,5 @@
 import ProvideAuth from "./ProvideAuth";
-import { useAuth } from "./useArcanaAuth";
+import { useAuth, useLogin, useProvider } from "./useArcanaAuth";
 import Auth from "./Auth";
 
-export { Auth, useAuth, ProvideAuth };
+export { Auth, useAuth, useLogin, useProvider, ProvideAuth };

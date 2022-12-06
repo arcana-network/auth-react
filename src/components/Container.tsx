@@ -4,13 +4,13 @@ import { ProvideTheme, useTheme } from "../Theme";
 import Footer from "./Footer";
 import { ThemeType } from "../typings";
 
-const Wrapper = styled.div<{ fg: string; bd: string }>`
+const Wrapper = styled.div<{ textColor: string; backgroundColor: string }>`
   padding: 30px 30px;
   min-width: 325px;
   max-width: 325px;
   min-height: 480px;
-  background-color: ${(props) => props.bd};
-  color: ${(props) => props.fg};
+  background-color: ${(props) => props.backgroundColor};
+  color: ${(props) => props.textColor};
   margin: 0 auto;
   font-family: "Sora", sans-serif;
   box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
@@ -43,7 +43,7 @@ const Container = (props: { theme: ThemeType; children: React.ReactNode }) => {
 const WrapperComponent = ({ children }: { children: React.ReactNode }) => {
   const theme = useTheme();
   return (
-    <Wrapper fg={theme.fg} bd={theme.bd}>
+    <Wrapper textColor={theme.fg} backgroundColor={theme.bd}>
       <Inner>{children}</Inner>
       <Footer />
     </Wrapper>

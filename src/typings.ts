@@ -17,10 +17,11 @@ type AuthContextType = {
   connect: () => Promise<EthereumProvider>;
   loginWithSocial: (p: string) => Promise<EthereumProvider>;
   logout: () => void;
-  provider: null;
+  provider: EthereumProvider;
   isLoggedIn: boolean;
   user: UserInfo | null;
-  appId: string;
+  logo: string;
+  theme: "light" | "dark";
 };
 
 export { ThemeType, ThemeSpec, AuthContextType };
