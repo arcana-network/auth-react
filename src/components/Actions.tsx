@@ -1,23 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 
-const Link = styled.a`
+const Link = styled.p<{ textColor: string }>`
   text-transform: uppercase;
-  color: #13a3fd;
-  font-weight: 700px;
+  text-decoration: underline;
+  color: ${(props) => props.textColor};
+  font-weight: 700;
   font-size: 15px;
   line-height: 19px;
+  cursor: pointer;
 `;
 
-const Wrapper = styled.div`
-  margin: 10px auto;
-`;
-
-const Actions = ({ text, url }: { text: string; url: string }): JSX.Element => {
+const Actions = ({
+  text,
+  method,
+}: {
+  text: string;
+  method: () => any;
+}): JSX.Element => {
   return (
-    <Wrapper>
-      <Link href={url}>{text}</Link>
-    </Wrapper>
+    <Link textColor={"#13a3fd"} onClick={() => method()}>
+      {text}
+    </Link>
   );
 };
 

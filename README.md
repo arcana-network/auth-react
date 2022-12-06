@@ -8,9 +8,9 @@ npm install @arcana/auth-react
 
 ## Usage
 
-### Login component
+Wrap you app with `ProvideAuth`
 
-`Index.js`
+`index.js`
 
 ```js
 import React from "react";
@@ -21,6 +21,7 @@ import { ProvideAuth } from "@arcana/auth-react";
 
 const provider = new AuthProvider(`${appId}`)
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
     <ProvideAuth provider={provider}>
@@ -30,29 +31,76 @@ root.render(
 );
 ```
 
-`App.jsx`
+### Hooks
+
+#### useAuth()
+
+`App.js`
+
+```js
+import { useAuth } from "@arcana/auth-react";
+
+function App() {
+  const { loading, isLoggedIn, connect, user } = useAuth()
+
+  const onConnectClick = async () => {
+    try {
+      await connect();
+    } catch (err) {
+      console.log({ err });
+      // Handle error
+    }
+  };
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (!isLoggedIn) {
+    return (
+      <button onClick={onConnectClick}>
+        Connect
+      </button>
+    );
+  }
+  return <Info info={user} />;
+}
+
+export default App
+```
+
+`useAuth` return type
+
+```ts
+type AuthContextType = {
+  loading: boolean;
+  connect: () => Promise<EthereumProvider>;
+  loginWithLink: (p: string) => Promise<EthereumProvider>;
+  loginWithSocial: (p: string) => Promise<EthereumProvider>;
+  logout: () => void;
+  isLoggedIn: boolean;
+  availableLogins: Logins[];
+  provider: EthereumProvider;
+  user: UserInfo | null;
+  theme: "dark" | "light";
+  logo: string
+};
+```
+
+### Login component
+
+`App.js`
 
 ```jsx
-import { Auth, useAuth } from "@arcana/auth-react";
+import { Auth } from "@arcana/auth-react";
 
-const onLogin = () => {
-  // Route to authenticated page
-}
 function App() {
-  const auth = useAuth();
-  return (
-    <div>
-      {auth.loading ? (
-        "Loading"
-      ) : auth.isLoggedIn ? (
-        <p>Logged In</p>
-      ) : (
-        <div>
-          <Auth externalWallet={true} theme={"light"} onLogin={onLogin}/>
-        </div>
-      )}
-    </div>
-  );
+  const { isLoggedIn, user } = useAuth()
+ 
+  if (!isLoggedIn) {
+    return <Auth theme="light" />;
+  }
+  return <Info info={user} />;
+  
 }
 
 export default App;

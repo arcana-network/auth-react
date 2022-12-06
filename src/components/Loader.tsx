@@ -1,6 +1,7 @@
 import React from "react";
 import { Oval } from "react-loader-spinner";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
+import { useTheme } from "../Theme";
 import { ThemeSpec } from "../typings";
 
 const Text = styled.p`
@@ -23,7 +24,7 @@ const Loader = (props: LoaderProps) => {
       <Oval
         height={70}
         width={70}
-        color={(theme as ThemeSpec).fg}
+        color={theme.fg}
         wrapperStyle={{}}
         wrapperClass=""
         visible={true}
