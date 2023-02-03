@@ -1,6 +1,6 @@
 {
   "name": "@arcana/auth-react",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Auth component for Arcana login handling",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
