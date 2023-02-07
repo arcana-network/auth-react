@@ -1,7 +1,7 @@
 {
   "name": "@arcana/auth-react",
   "version": "0.0.3",
-  "description": "Auth component for Arcana login handling",
+  "description": "Auth component & hooks for Arcana login handling",
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
   "types": "types/index.d.ts",
@@ -20,7 +20,7 @@
     "types"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@arcana/auth": "^1.0.0",
     "@rollup/plugin-commonjs": "^22.0.2",
