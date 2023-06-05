@@ -33,7 +33,7 @@ const reducer = (
     return state;
   }
 };
-type AuthProps = {
+export type AuthProps = {
   externalWallet: boolean;
   theme: ThemeType;
   onLogin?: () => void;

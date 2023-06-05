@@ -1,5 +1,14 @@
 import ProvideAuth from "./ProvideAuth";
 import { useAuth, useLogin, useProvider } from "./useArcanaAuth";
-import Auth from "./Auth";
+import { AuthContextType } from "./typings";
+import Auth, { AuthProps } from "./Auth";
 
-export { Auth, useAuth, useLogin, useProvider, ProvideAuth };
+export {
+  Auth,
+  AuthProps,
+  AuthContextType,
+  useAuth,
+  useLogin,
+  useProvider,
+  ProvideAuth,
+};
