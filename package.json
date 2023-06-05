@@ -10,6 +10,8 @@
     "build:esm": "rollup --config",
     "build:types": "tsc --declaration --emitDeclarationOnly",
     "build:watch": "tsc --watch",
+    "docs": "typedoc --options typedoc.json",
+    "htmldocs": "typedoc --options typedochtml.json",
     "typecheck": "tsc --noEmit --skipLibCheck",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write .",
@@ -34,6 +36,9 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.79.1",
     "tslib": "^2.4.0",
+    "typedoc": "^0.24.8",
+    "typedoc-plugin-extras": "^2.2.3",
+    "typedoc-plugin-markdown": "^3.12.1",
     "typescript": "^4.8.3"
   },
   "peerDependencies": {
