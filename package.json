@@ -10,6 +10,8 @@
     "build:esm": "rollup --config",
     "build:types": "tsc --declaration --emitDeclarationOnly",
     "build:watch": "tsc --watch",
+    "docs": "typedoc --options typedoc.json",
+    "htmldocs": "typedoc --options typedochtml.json",
     "typecheck": "tsc --noEmit --skipLibCheck",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write .",

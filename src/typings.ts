@@ -13,9 +13,9 @@ type ThemeSpec = {
 type AuthContextType = {
   loading: boolean;
   availableLogins: Logins[];
-  loginWithLink: (p: string) => Promise<EthereumProvider>;
+  loginWithLink: (email: string) => Promise<EthereumProvider>;
   connect: () => Promise<EthereumProvider>;
-  loginWithSocial: (p: string) => Promise<EthereumProvider>;
+  loginWithSocial: (provider: string) => Promise<EthereumProvider>;
   logout: () => void;
   provider: EthereumProvider;
   isLoggedIn: boolean;
